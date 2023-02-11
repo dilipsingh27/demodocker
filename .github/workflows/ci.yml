@@ -23,7 +23,7 @@ jobs:
       PAT: ${{ secrets.GITH_TOKEN}}
       USER: dilipsingh27
       REGISTRY: ghcr.io
-      VERSION: v1
+      VERSION: ${{ github.sha }}
 
     steps:
       - name: Checkout
