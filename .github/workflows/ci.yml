@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TAG: dockertest
-      PAT: ${{ secrets.GITH_TOKEN}}
+      PAT: ${{ secrets.GITHUB_TOKEN }}
       USER: dilipsingh27
       REGISTRY: ghcr.io
       VERSION: ${{ github.sha }}
