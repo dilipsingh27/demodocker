@@ -30,9 +30,10 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build Docker Image
-        run: docker build -t $TAG ../../
+        run: docker build -t $TAG .
 
       - name: Login to ghcr
         run: |
           echo $PAT | docker login ghcr.io -u $USER --password-stdin
+          docker tag $TAG ${{env.REGISTRY}}/$USER/$TAG:latest
           docker push ${{env.REGISTRY}}/$USER/$TAG:${{ env.VERSION }}
