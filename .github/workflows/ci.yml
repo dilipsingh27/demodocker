@@ -53,5 +53,7 @@ jobs:
       - name: Login to ghcr
         run: |
           echo ${{secrets.GITHUB_TOKEN}} | docker login $REGISTRY -u $USER --password-stdin >/dev/null 2>&1
+      - name: Push docker image
+        run: |
           docker tag $IMAGE_NAME ${{env.REGISTRY}}/$USER/$IMAGE_NAME:$TAG
           docker push ${{env.REGISTRY}}/$USER/$IMAGE_NAME:$TAG
