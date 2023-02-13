@@ -19,21 +19,20 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     env:
-      TAG: dockertest
-      PAT: ${{ secrets.GITHUB_TOKEN }}
-      USER: dilipsingh27
       REGISTRY: ghcr.io
-      VERSION: ${{ github.sha }}
+      USER: $(echo ${{github.repository}} | cut -d'/' -f1 | tr '[:upper:]' '[:lower:]')
+      IMAGE_NAME: $(echo ${{github.repository}} | cut -d'/' -f2 | tr '[:upper:]' '[:lower:]')
+      TAG: $(cat version.txt)-$(echo ${{github.sha}} | tail -c 8)
 
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
       - name: Build Docker Image
-        run: docker build -t $TAG .
+        run: docker build -t $IMAGE_NAME .
 
       - name: Login to ghcr
         run: |
-          echo $PAT | docker login ghcr.io -u $USER --password-stdin
-          docker tag $TAG ${{env.REGISTRY}}/$USER/$TAG:$VERSION
-          docker push ${{env.REGISTRY}}/$USER/$TAG:$VERSION
+          echo ${{secrets.GITHUB_TOKEN}} | docker login $REGISTRY -u $USER --password-stdin >/dev/null 2>&1
+          docker tag $IMAGE_NAME ${{env.REGISTRY}}/$USER/$IMAGE_NAME:$TAG
+          docker push ${{env.REGISTRY}}/$USER/$IMAGE_NAME:$TAG
