@@ -47,7 +47,7 @@ jobs:
         docker tag ${{env.IMAGE_NAME}} ${{env.REGISTRY}}/${{env.OWNER}}/${{env.IMAGE_NAME}}:${{env.TAG}}
         docker push ${{env.REGISTRY}}/${{env.OWNER}}/${{env.IMAGE_NAME}}:${{env.TAG}}
 
-# name: Release
+# name: Release 
 # on:
 #   workflow_dispatch:
 #   push:
