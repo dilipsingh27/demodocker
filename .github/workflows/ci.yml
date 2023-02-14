@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main 
+    workflow_dispatch:
 env:
   REGISTRY: ghcr.io
   OWNER: $(echo ${{github.repository}} | cut -d'/' -f1 | tr '[:upper:]' '[:lower:]')
@@ -49,7 +50,7 @@ jobs:
 
 # name: Release 
 # on:
-#   workflow_dispatch:
+#   workflow_dispatch: 
 #   push:
 #     branches:
 #       - main
