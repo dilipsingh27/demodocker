@@ -45,7 +45,7 @@ jobs:
     - name: Push Docker Image 
       run: |
         docker tag ${{env.IMAGE_NAME}} ${{env.REGISTRY}}/${{env.OWNER}}/${{env.IMAGE_NAME}}:${{env.TAG}}
-        docker push ${{env.REGISTRY}}/${{env.OWNER}}/${{env.IMAGE_NAME}}:${{env.TAG}}
+        docker push ${{env.REGISTRY}}/${{env.OWNER}}/${{env.IMAGE_NAME}}:${{env.TAG}} 
 
 # name: Release 
 # on:
