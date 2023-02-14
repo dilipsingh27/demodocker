@@ -42,7 +42,7 @@ jobs:
       run: |
         echo ${{secrets.GITHUB_TOKEN}} | docker login ${{env.REGISTRY}} -u ${{env.OWNER}} --password-stdin >/dev/null 2>&1
     
-    - name: Push Docker Image
+    - name: Push Docker Image 
       run: |
         docker tag ${{env.IMAGE_NAME}} ${{env.REGISTRY}}/${{env.OWNER}}/${{env.IMAGE_NAME}}:${{env.TAG}}
         docker push ${{env.REGISTRY}}/${{env.OWNER}}/${{env.IMAGE_NAME}}:${{env.TAG}}
